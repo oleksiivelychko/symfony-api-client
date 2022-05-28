@@ -8,18 +8,21 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Input\InputArgument;
 
-class CreateGroupCommand extends BaseCommand
+class UpdateGroupCommand extends BaseCommand
 {
-    protected static $defaultName = 'api:create-group';
+    protected static $defaultName = 'api:update-group';
 
     protected function configure(): void
     {
         $this
-            ->setDescription('Create a new group via API')
-            ->setHelp('This command allows you to create a group...')
+            ->setDescription('Update an group via API')
+            ->setHelp('This command allows you to edit a group...')
         ;
 
-        $this->addArgument('name', InputArgument::REQUIRED, 'Input group name:');
+        $this
+            ->addArgument('id', InputArgument::REQUIRED, 'Input group ID:')
+            ->addArgument('name', InputArgument::REQUIRED, 'Input group name:')
+        ;
     }
 
     /**
@@ -33,7 +36,7 @@ class CreateGroupCommand extends BaseCommand
         ]);
 
         try {
-            $response = $this->apiClient->post($this->apiVersion.'/groups', [
+            $response = $this->apiClient->put($this->apiVersion.'/groups/'.$input->getArgument('id'), [
                 'json' => [
                     'name' => $input->getArgument('name')
                 ]
@@ -46,7 +49,7 @@ class CreateGroupCommand extends BaseCommand
 
         $data = json_decode($response->getBody()->getContents(), true);
         $output->writeln([
-            'Group has been created!',
+            'Group has been updated!',
             '=======================',
             'GroupID: '.$data['id'],
             'Group name: '.$data['name']
