@@ -28,11 +28,6 @@ class ListUsersInGroupsCommand extends BaseCommand
      */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $output->writeln([
-            'WARNING! API SERVER MUST BE RUNNING!',
-            '====================================',
-        ]);
-
         try {
             $this->apiClient->get($this->apiVersion);
         } catch (RequestException $e) {

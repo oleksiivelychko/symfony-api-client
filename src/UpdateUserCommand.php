@@ -31,11 +31,6 @@ class UpdateUserCommand extends BaseCommand
      */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $output->writeln([
-            'WARNING! API SERVER MUST BE RUNNING!',
-            '====================================',
-        ]);
-
         $json = [
             'name' => $input->getArgument('name'),
             'groups' => []

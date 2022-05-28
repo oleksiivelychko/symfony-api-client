@@ -27,11 +27,6 @@ class DeleteUserCommand extends BaseCommand
      */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $output->writeln([
-            'WARNING! API SERVER MUST BE RUNNING!',
-            '====================================',
-        ]);
-
         try {
             $this->apiClient->delete($this->apiVersion.'/users/'.$input->getArgument('id'));
         } catch (RequestException $e) {

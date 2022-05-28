@@ -27,11 +27,6 @@ class CreateGroupCommand extends BaseCommand
      */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $output->writeln([
-            'WARNING! API SERVER MUST BE RUNNING!',
-            '====================================',
-        ]);
-
         try {
             $response = $this->apiClient->post($this->apiVersion.'/groups', [
                 'json' => [

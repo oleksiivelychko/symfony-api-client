@@ -27,11 +27,6 @@ class DeleteGroupCommand extends BaseCommand
      */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $output->writeln([
-            'WARNING! API SERVER MUST BE RUNNING!',
-            '====================================',
-        ]);
-
         try {
             $response = $this->apiClient->delete($this->apiVersion.'/groups/'.$input->getArgument('id'));
         } catch (RequestException $e) {
