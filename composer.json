@@ -1,5 +1,7 @@
 {
     "require": {
-        "symfony/console": "^6.1"
+        "symfony/console": "^6.1",
+        "guzzlehttp/guzzle": "^7.4",
+        "vlucas/phpdotenv": "^5.4"
     }
 }
