@@ -31,7 +31,7 @@ class DeleteUserCommand extends BaseCommand
             $this->apiClient->delete($this->apiVersion.'/users/'.$input->getArgument('id'));
         } catch (RequestException $e) {
             $data = json_decode($e->getResponse()->getBody()->getContents(), true);
-            $output->writeln([$data['title'] ?? '', $data['detail'] ?? '', $e->getMessage()]);
+            $output->writeln([$data['title'] ?? '', $data['detail'] ?? '']);
             return Command::INVALID;
         }
 

@@ -46,7 +46,7 @@ class UpdateUserCommand extends BaseCommand
             ]);
         } catch (RequestException $e) {
             $data = json_decode($e->getResponse()->getBody()->getContents(), true);
-            $output->writeln([$data['title'] ?? '', $data['detail'] ?? '', $e->getMessage()]);
+            $output->writeln([$data['title'] ?? '', $data['detail'] ?? '']);
             return Command::INVALID;
         }
 
