@@ -24,4 +24,15 @@ abstract class BaseCommand extends Command
 
         $this->apiVersion = $_ENV['API_VERSION'] ? '/api-v'.$_ENV['API_VERSION'] : '/api';
     }
+
+    protected function getGroupsIds(string $groupsIds): array
+    {
+        return array_map(function (int $id) {
+            if (!$_ENV['API_VERSION']) {
+                return "/api/groups/$id";
+            } else {
+                return $id;
+            }
+        }, explode(',', $groupsIds));
+    }
 }

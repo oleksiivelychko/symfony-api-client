@@ -8,20 +8,20 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Input\InputArgument;
 
-final class CreateUserCommand extends BaseCommand
+class UpdateUserCommand extends BaseCommand
 {
-    protected static $defaultName = 'api:create-user';
+    protected static $defaultName = 'api:update-user';
 
     protected function configure(): void
     {
         $this
-            ->setDescription('Create a new user via API')
-            ->setHelp('This command allows you to create a user...')
+            ->setDescription('Update an user via API')
+            ->setHelp('This command allows you to edit a user...')
         ;
 
         $this
+            ->addArgument('id', InputArgument::REQUIRED, 'Input user ID:')
             ->addArgument('name', InputArgument::REQUIRED, 'Input user name:')
-            ->addArgument('email', InputArgument::REQUIRED, 'Input user email:')
             ->addArgument('groups', InputArgument::OPTIONAL, 'Input groups IDs:')
         ;
     }
@@ -38,7 +38,7 @@ final class CreateUserCommand extends BaseCommand
 
         $json = [
             'name' => $input->getArgument('name'),
-            'email' => $input->getArgument('email'),
+            'groups' => []
         ];
 
         if ($input->getArgument('groups')) {
@@ -46,7 +46,9 @@ final class CreateUserCommand extends BaseCommand
         }
 
         try {
-            $response = $this->apiClient->post($this->apiVersion.'/users', ['json' => $json]);
+            $response = $this->apiClient->put($this->apiVersion.'/users/'.$input->getArgument('id'), [
+                'json' => $json
+            ]);
         } catch (RequestException $e) {
             $data = json_decode($e->getResponse()->getBody()->getContents(), true);
             $output->writeln([$data['title'] ?? '', $data['detail'] ?? '', $e->getMessage()]);
@@ -55,11 +57,10 @@ final class CreateUserCommand extends BaseCommand
 
         $data = json_decode($response->getBody()->getContents(), true);
         $output->writeln([
-            'User has been created!',
+            'User has been updated!',
             '======================',
             'User ID: '.$data['id'],
-            'User name: '.$data['name'],
-            'User email: '.$data['email'],
+            'User name: '.$data['name']
         ]);
 
         return Command::SUCCESS;
