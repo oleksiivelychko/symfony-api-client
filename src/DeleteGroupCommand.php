@@ -8,21 +8,18 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Input\InputArgument;
 
-class UpdateGroupCommand extends BaseCommand
+class DeleteGroupCommand extends BaseCommand
 {
-    protected static $defaultName = 'api:update-group';
+    protected static $defaultName = 'api:delete-group';
 
     protected function configure(): void
     {
         $this
-            ->setDescription('Update a group via API')
-            ->setHelp('This command allows you to edit a group...')
+            ->setDescription('Delete a group via API')
+            ->setHelp('This command allows you to delete a group...')
         ;
 
-        $this
-            ->addArgument('id', InputArgument::REQUIRED, 'Input group ID:')
-            ->addArgument('name', InputArgument::REQUIRED, 'Input group name:')
-        ;
+        $this->addArgument('id', InputArgument::REQUIRED, 'Input group ID:');
     }
 
     /**
@@ -36,23 +33,16 @@ class UpdateGroupCommand extends BaseCommand
         ]);
 
         try {
-            $response = $this->apiClient->put($this->apiVersion.'/groups/'.$input->getArgument('id'), [
-                'json' => [
-                    'name' => $input->getArgument('name')
-                ]
-            ]);
+            $response = $this->apiClient->delete($this->apiVersion.'/groups/'.$input->getArgument('id'));
         } catch (RequestException $e) {
             $data = json_decode($e->getResponse()->getBody()->getContents(), true);
             $output->writeln([$data['title'] ?? '', $data['detail'] ?? '']);
             return Command::INVALID;
         }
 
-        $data = json_decode($response->getBody()->getContents(), true);
         $output->writeln([
-            'Group has been updated!',
+            'Group has been removed!',
             '=======================',
-            'GroupID: '.$data['id'],
-            'Group name: '.$data['name']
         ]);
 
         return Command::SUCCESS;
