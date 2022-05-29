@@ -66,7 +66,7 @@ class ListUsersInGroupsCommand extends BaseCommand
             'Group name: '.$item['name']
         ];
 
-        foreach ($item['users'] as $user) {
+        foreach ($item['data']['users'] as $user) {
             $formatted[] = 'User name is '.$user['name'].', email is '.$user['email'];
         }
 
