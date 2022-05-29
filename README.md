@@ -6,39 +6,40 @@ Available console commands:
 
 📌 Create group.
 ```
-./console.php api:create-group test
+./console.php api:create-group [name]
 ```
 
 📌 Update group.
 ```
-./console.php api:update-group 1 newTest
+./console.php api:update-group [id] [name]
 ```
 
 📌 Delete group.
 ```
-./console.php api:delete-group 1
+./console.php api:delete-group [id]
 ```
 
 📌 Create user.
 ```
-./console.php api:create-user test test@test.test
+./console.php api:create-user [name] [email]
 ```
 
 📌 Update user (...and add to groups 1,2).
 ```
-./console.php api:create-user 1 test 1,2
+./console.php api:update-user [id] [name] [groupId,groupId...]
 ```
 
 📌 Delete user.
 ```
-./console.php api:delete-user 1
+./console.php api:delete-user [id]
 ```
 
 📌 List users in groups.
 ```
-./console.php api:list-group
+./console.php api:list-group [id]
 ```
 
+💡 <a href="https://github.com/oleksiivelychko/symfony-api">API server</a> must be running before use.
 💡 To switch between API versions set the desirable version as environment variable:
 ```
 API_VERSION=2
