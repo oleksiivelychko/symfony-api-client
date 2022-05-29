@@ -38,7 +38,8 @@ class ListUsersInGroupsCommand extends BaseCommand
         try {
             $response = $this->apiClient->get($this->apiVersion.'/groups/' . $input->getArgument('id') ?: '');
         } catch (RequestException $e) {
-            $output->writeln($e->getResponse()->getBody()->getContents());
+            $data = json_decode($e->getResponse()->getBody()->getContents(), true);
+            $output->writeln([$data['title'] ?? '', $data['detail'] ?? '']);
             return Command::INVALID;
         }
 
