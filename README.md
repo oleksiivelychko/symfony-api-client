@@ -40,7 +40,11 @@ Available console commands:
 ```
 
 💡 <a href="https://github.com/oleksiivelychko/symfony-api">API server</a> must be running before use.
+
 💡 To switch between API versions set the desirable version as environment variable:
 ```
 API_VERSION=2
 ```
+
+💡 In order to debug CLI application in PhpStorm settings **PHP -> Debug** 
+select `Ignore external connections through unregistered server configurations`
