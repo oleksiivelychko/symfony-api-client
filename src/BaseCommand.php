@@ -19,7 +19,7 @@ abstract class BaseCommand extends Command
                 'accept' => 'application/json'
             ],
             'base_uri' => $_ENV['API_URL'] ?? 'http://localhost:8000',
-            'timeout'  => 10.0, // in seconds
+            'timeout'  => 1000.0, // in seconds
         ]);
 
         $this->apiVersion = $_ENV['API_VERSION'] ? '/api-v'.$_ENV['API_VERSION'] : '/api';

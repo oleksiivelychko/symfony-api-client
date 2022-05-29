@@ -44,7 +44,7 @@ final class CreateUserCommand extends BaseCommand
             $response = $this->apiClient->post($this->apiVersion.'/users', ['json' => $json]);
         } catch (RequestException $e) {
             $data = json_decode($e->getResponse()->getBody()->getContents(), true);
-            $output->writeln([$data['title'] ?? '', $data['detail'] ?? '']);
+            $output->writeln([$data['title'] ?? '', $data['detail'] ?? '', $data['error'] ?? '']);
             return Command::INVALID;
         }
 
