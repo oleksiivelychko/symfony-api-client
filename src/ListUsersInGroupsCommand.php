@@ -29,13 +29,6 @@ class ListUsersInGroupsCommand extends BaseCommand
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         try {
-            $this->apiClient->get($this->apiVersion);
-        } catch (RequestException $e) {
-            $output->writeln('Something was happened with API server.😢');
-            return Command::FAILURE;
-        }
-
-        try {
             $response = $this->apiClient->get($this->apiVersion.'/groups/' . $input->getArgument('id') ?: '');
         } catch (RequestException $e) {
             $data = json_decode($e->getResponse()->getBody()->getContents(), true);
@@ -62,12 +55,14 @@ class ListUsersInGroupsCommand extends BaseCommand
 
     private function formatItem(array $item, bool $delimiter=false): array
     {
+        $item = $item[0] ?? $item;
+
         $formatted = [
             'Group ID: '.$item['id'],
             'Group name: '.$item['name']
         ];
 
-        foreach ($item['data']['users'] as $user) {
+        foreach ($item['data']['users'] ?? $item['users']  as $user) {
             $formatted[] = 'User name is '.$user['name'].', email is '.$user['email'];
         }
 
