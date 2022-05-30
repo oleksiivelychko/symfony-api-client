@@ -5,9 +5,15 @@
         "guzzlehttp/guzzle": "^7.4",
         "vlucas/phpdotenv": "^5.4"
     },
+    "require-dev": {
+        "symfony/framework-bundle": "6.0.*",
+        "symfony/test-pack": "^1.0",
+        "phpunit/phpunit": "^9"
+    },
     "autoload": {
         "psr-4": {
-            "Console\\": "src/"
+            "Console\\": "src/",
+            "Tests\\": "tests/"
         }
     }
 }
