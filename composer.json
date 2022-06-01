@@ -1,4 +1,16 @@
 {
+    "name": "oleksiivelychko/symfony-api-client",
+    "description": "CLI client based on Symfony console skeleton which interacts with remote API.",
+    "homepage": "https://github.com/oleksiivelychko/symfony-api-client",
+    "type": "project",
+    "license": "MIT",
+    "keywords": ["console", "symfony", "api", "command"],
+    "authors": [
+        {
+            "name": "Oleksii Velychko",
+            "email": "oleksiivelychko@icloud.com"
+        }
+    ],
     "require": {
         "php": ">=8.1",
         "symfony/console": "^6.1",
@@ -12,8 +24,18 @@
     },
     "autoload": {
         "psr-4": {
-            "Console\\": "src/",
+            "Console\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
             "Tests\\": "tests/"
         }
-    }
+    },
+    "config": {
+        "preferred-install": "dist",
+        "sort-packages": true
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }
