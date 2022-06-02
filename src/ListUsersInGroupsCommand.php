@@ -3,23 +3,23 @@
 namespace Console;
 
 use GuzzleHttp\Exception\RequestException;
+use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Input\InputArgument;
 
+#[AsCommand(
+    name: 'api:list-group',
+    description: 'List of users of each group using API',
+    aliases: ['api:list-group']
+)]
 class ListUsersInGroupsCommand extends BaseCommand
 {
-    protected static $defaultName = 'api:list-group';
     private const DELIMITER = '----------------------------------------';
 
     protected function configure(): void
     {
-        $this
-            ->setDescription('List of users of each group via API')
-            ->setHelp('This command allows you to display users of the group.')
-        ;
-
         $this->addArgument('id', InputArgument::OPTIONAL, 'Input group ID:');
     }
 

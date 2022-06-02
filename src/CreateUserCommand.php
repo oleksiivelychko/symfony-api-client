@@ -7,18 +7,17 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Input\InputArgument;
+use Symfony\Component\Console\Attribute\AsCommand;
 
+#[AsCommand(
+    name: 'create-user',
+    description: 'Create an user via API',
+    aliases: ['api:create-user']
+)]
 final class CreateUserCommand extends BaseCommand
 {
-    protected static $defaultName = 'api:create-user';
-
     protected function configure(): void
     {
-        $this
-            ->setDescription('Create a new user via API')
-            ->setHelp('This command allows you to create a user...')
-        ;
-
         $this
             ->addArgument('name', InputArgument::REQUIRED, 'Input user name:')
             ->addArgument('email', InputArgument::REQUIRED, 'Input user email:')

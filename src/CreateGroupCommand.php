@@ -3,22 +3,21 @@
 namespace Console;
 
 use GuzzleHttp\Exception\RequestException;
+use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Input\InputArgument;
 
+#[AsCommand(
+    name: 'create-group',
+    description: 'Create a group using API',
+    aliases: ['api:create-group']
+)]
 class CreateGroupCommand extends BaseCommand
 {
-    protected static $defaultName = 'api:create-group';
-
     protected function configure(): void
     {
-        $this
-            ->setDescription('Create a new group via API')
-            ->setHelp('This command allows you to create a group...')
-        ;
-
         $this->addArgument('name', InputArgument::REQUIRED, 'Input group name:');
     }
 

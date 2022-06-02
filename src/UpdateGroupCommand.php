@@ -3,22 +3,21 @@
 namespace Console;
 
 use GuzzleHttp\Exception\RequestException;
+use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Input\InputArgument;
 
+#[AsCommand(
+    name: 'api:update-group',
+    description: 'Update a group using API',
+    aliases: ['api:update-group']
+)]
 class UpdateGroupCommand extends BaseCommand
 {
-    protected static $defaultName = 'api:update-group';
-
     protected function configure(): void
     {
-        $this
-            ->setDescription('Update a group via API')
-            ->setHelp('This command allows you to edit a group...')
-        ;
-
         $this
             ->addArgument('id', InputArgument::REQUIRED, 'Input group ID:')
             ->addArgument('name', InputArgument::REQUIRED, 'Input group name:')
