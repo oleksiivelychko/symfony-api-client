@@ -48,3 +48,5 @@ API_VERSION=2
 
 💡 In order to debug CLI application in PhpStorm settings **PHP -> Debug** 
 select `Ignore external connections through unregistered server configurations`
+
+Covered by integration tests.
