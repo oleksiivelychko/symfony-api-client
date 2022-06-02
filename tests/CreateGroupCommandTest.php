@@ -26,7 +26,7 @@ class CreateGroupCommandTest extends KernelTestCase
         $this->assertStringContainsString(
             "Group has been created!
 =======================
-GroupID: 1
+Group ID: 1
 Group name: group-01",
             $output
         );

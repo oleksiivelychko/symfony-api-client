@@ -45,7 +45,7 @@ class UpdateGroupCommand extends BaseCommand
         $output->writeln([
             'Group has been updated!',
             '=======================',
-            'GroupID: '.$data['id'],
+            'Group ID: '.$data['id'],
             'Group name: '.$data['name']
         ]);
 

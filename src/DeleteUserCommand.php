@@ -37,7 +37,7 @@ class DeleteUserCommand extends BaseCommand
         }
 
         $output->writeln([
-            'User has been removed!',
+            'User has been deleted!',
             '======================'
         ]);
 

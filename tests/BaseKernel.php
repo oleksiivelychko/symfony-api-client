@@ -3,8 +3,11 @@
 namespace Tests;
 
 use Console\CreateGroupCommand;
+use Console\CreateUserCommand;
 use Console\DeleteGroupCommand;
+use Console\DeleteUserCommand;
 use Console\UpdateGroupCommand;
+use Console\UpdateUserCommand;
 use Psr\Log\NullLogger;
 use Symfony\Bundle\FrameworkBundle\FrameworkBundle;
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
@@ -33,6 +36,21 @@ final class BaseKernel extends Kernel
         ;
 
         $container->register(DeleteGroupCommand::class)
+            ->setAutoconfigured(true)
+            ->setAutowired(true)
+        ;
+
+        $container->register(CreateUserCommand::class)
+            ->setAutoconfigured(true)
+            ->setAutowired(true)
+        ;
+
+        $container->register(UpdateUserCommand::class)
+            ->setAutoconfigured(true)
+            ->setAutowired(true)
+        ;
+
+        $container->register(DeleteUserCommand::class)
             ->setAutoconfigured(true)
             ->setAutowired(true)
         ;

@@ -42,7 +42,7 @@ class CreateGroupCommand extends BaseCommand
         $output->writeln([
             'Group has been created!',
             '=======================',
-            'GroupID: '.$data['id'],
+            'Group ID: '.$data['id'],
             'Group name: '.$data['name']
         ]);
 
