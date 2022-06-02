@@ -3,13 +3,15 @@
 namespace Tests;
 
 use Console\CreateGroupCommand;
+use Console\DeleteGroupCommand;
+use Console\UpdateGroupCommand;
 use Psr\Log\NullLogger;
 use Symfony\Bundle\FrameworkBundle\FrameworkBundle;
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\HttpKernel\Kernel as BaseKernel;
+use Symfony\Component\HttpKernel\Kernel;
 
-final class Kernel extends BaseKernel
+final class BaseKernel extends Kernel
 {
     use MicroKernelTrait;
 
@@ -21,6 +23,16 @@ final class Kernel extends BaseKernel
     protected function configureContainer(ContainerBuilder $container): void
     {
         $container->register(CreateGroupCommand::class)
+            ->setAutoconfigured(true)
+            ->setAutowired(true)
+        ;
+
+        $container->register(UpdateGroupCommand::class)
+            ->setAutoconfigured(true)
+            ->setAutowired(true)
+        ;
+
+        $container->register(DeleteGroupCommand::class)
             ->setAutoconfigured(true)
             ->setAutowired(true)
         ;

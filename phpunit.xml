@@ -4,7 +4,6 @@
 <phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:noNamespaceSchemaLocation="vendor/phpunit/phpunit/phpunit.xsd"
          colors="true"
-         convertDeprecationsToExceptions="false"
          bootstrap="bootstrap.php"
 >
     <php>
@@ -13,6 +12,7 @@
         <server name="SHELL_VERBOSITY" value="-1" />
         <server name="SYMFONY_PHPUNIT_REMOVE" value="" />
         <server name="SYMFONY_PHPUNIT_VERSION" value="9" />
+        <server name="KERNEL_CLASS" value="Tests\BaseKernel" />
     </php>
 
     <listeners>
