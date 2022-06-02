@@ -35,7 +35,7 @@ class DeleteGroupCommand extends BaseCommand
         }
 
         $output->writeln([
-            'Group has been removed!',
+            'Group has been deleted!',
             '=======================',
         ]);
 
