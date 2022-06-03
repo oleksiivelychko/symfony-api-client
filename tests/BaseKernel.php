@@ -6,6 +6,7 @@ use Console\CreateGroupCommand;
 use Console\CreateUserCommand;
 use Console\DeleteGroupCommand;
 use Console\DeleteUserCommand;
+use Console\ListUsersInGroupsCommand;
 use Console\UpdateGroupCommand;
 use Console\UpdateUserCommand;
 use Psr\Log\NullLogger;
@@ -51,6 +52,11 @@ final class BaseKernel extends Kernel
         ;
 
         $container->register(DeleteUserCommand::class)
+            ->setAutoconfigured(true)
+            ->setAutowired(true)
+        ;
+
+        $container->register(ListUsersInGroupsCommand::class)
             ->setAutoconfigured(true)
             ->setAutowired(true)
         ;

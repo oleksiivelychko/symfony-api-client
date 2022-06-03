@@ -10,7 +10,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Input\InputArgument;
 
 #[AsCommand(
-    name: 'api:update-group',
+    name: 'update-group',
     description: 'Update a group using API',
     aliases: ['api:update-group']
 )]

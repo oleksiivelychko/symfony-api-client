@@ -10,7 +10,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Input\InputArgument;
 
 #[AsCommand(
-    name: 'api:list-group',
+    name: 'list-group',
     description: 'List of users of each group using API',
     aliases: ['api:list-group']
 )]

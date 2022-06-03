@@ -10,7 +10,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Input\InputArgument;
 
 #[AsCommand(
-    name: 'api:update-user',
+    name: 'update-user',
     description: 'Update an user using API',
     aliases: ['api:update-user']
 )]
