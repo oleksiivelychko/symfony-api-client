@@ -9,7 +9,7 @@ use Symfony\Component\Console\Command\Command;
 
 abstract class BaseCommand extends Command
 {
-    const SUCCESSFUL_OP = "\033[1mOperation has been successful!\n\033[0m\033[32m";
+    const SUCCESSFUL_OP = "👌\033[1mOperation has been successful!\n\033[0m\033[32m";
 
     protected Client $apiClient;
     protected string $apiVersion;
