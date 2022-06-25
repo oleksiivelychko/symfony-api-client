@@ -31,14 +31,13 @@ class DeleteUserCommand extends BaseCommand
         try {
             $this->apiClient->delete($this->apiVersion.'/users/'.$input->getArgument('id'));
         } catch (RequestException $e) {
-            $data = json_decode($e->getResponse()->getBody()->getContents(), true);
+            $data = $this->getResponseContent($e->getResponse());
             $output->writeln([$data['title'] ?? '', $data['detail'] ?? '', $data['error'] ?? '']);
             return Command::INVALID;
         }
 
         $output->writeln([
-            'User has been deleted!',
-            '======================'
+            self::SUCCESSFUL_OP,
         ]);
 
         return Command::SUCCESS;

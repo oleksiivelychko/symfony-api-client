@@ -37,7 +37,7 @@ final class CreateUserCommand extends BaseCommand
                     'name' => $input->getArgument('name'),
                     'email' => $input->getArgument('email'),
                     'groups' => $input->getArgument('groups'),
-                ]
+                ],
             ]);
         } catch (RequestException $e) {
             $data = $this->getResponseContent($e->getResponse());

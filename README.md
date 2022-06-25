@@ -24,12 +24,12 @@ Available console commands:
 ./console.php api:create-user [name] [email] [groupId groupId...]
 ```
 
-📌 Update user (...and add to groups 1,2).
+📌 Update user:
 ```
-./console.php api:update-user [id] [name] [groupId,groupId...]
+./console.php api:update-user [id] [name] [groupId groupId...]
 ```
 
-📌 Delete user.
+📌 Delete user:
 ```
 ./console.php api:delete-user [id]
 ```
