@@ -18,18 +18,9 @@ class UpdateGroupCommandTest extends KernelTestCase
         $commandTester->execute([
             'id' => 1,
             'name' => 'group-02',
+            'users' => [2],
         ]);
 
         $commandTester->assertCommandIsSuccessful();
-
-        $output = $commandTester->getDisplay();
-
-        $this->assertStringContainsString(
-            "Group has been updated!
-=======================
-Group ID: 1
-Group name: group-02",
-            $output
-        );
     }
 }

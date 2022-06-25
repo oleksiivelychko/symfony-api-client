@@ -16,23 +16,11 @@ class CreateUserCommandTest extends KernelTestCase
         $command = $application->find('api:create-user');
         $commandTester = new CommandTester($command);
         $commandTester->execute([
-            'name' => 'user-01',
-            'email' => 'user-01@email.com',
-            'groups' => 1,
+            'name' => 'user',
+            'email' => 'user'.time().'@email.com',
+            'groups' => [1,2],
         ]);
 
         $commandTester->assertCommandIsSuccessful();
-
-        $output = $commandTester->getDisplay();
-
-        $this->assertStringContainsString(
-            "User has been created!
-======================
-User ID: 1
-User name: user-01
-User email: user-01@email.com
-",
-            $output
-        );
     }
 }

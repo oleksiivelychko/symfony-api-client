@@ -2,6 +2,7 @@
 
 namespace Tests;
 
+use Console\BaseCommand;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\Console\Tester\CommandTester;
@@ -21,12 +22,6 @@ class DeleteGroupCommandTest extends KernelTestCase
 
         $commandTester->assertCommandIsSuccessful();
 
-        $output = $commandTester->getDisplay();
-
-        $this->assertStringContainsString(
-            "Group has been deleted!
-=======================",
-            $output
-        );
+        $this->assertStringContainsString(BaseCommand::SUCCESSFUL_OP, $commandTester->getDisplay());
     }
 }

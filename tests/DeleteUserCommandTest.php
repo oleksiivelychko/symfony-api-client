@@ -2,6 +2,7 @@
 
 namespace Tests;
 
+use Console\BaseCommand;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\Console\Tester\CommandTester;
@@ -21,13 +22,9 @@ class DeleteUserCommandTest extends KernelTestCase
 
         $commandTester->assertCommandIsSuccessful();
 
-        $output = $commandTester->getDisplay();
-
         $this->assertStringContainsString(
-            'User has been deleted!
-======================
-',
-            $output
+            BaseCommand::SUCCESSFUL_OP,
+            $commandTester->getDisplay()
         );
     }
 }

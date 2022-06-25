@@ -20,16 +20,5 @@ class ListUsersInGroupsCommandTest extends KernelTestCase
         ]);
 
         $commandTester->assertCommandIsSuccessful();
-
-        $output = $commandTester->getDisplay();
-
-        $this->assertStringContainsString(
-            "Group ID: 1
-Group name: group-01
-User name is user-01, email is user-01@email.com
-Users in group has been displayed
-----------------------------------------",
-            $output
-        );
     }
 }

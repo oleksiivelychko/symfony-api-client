@@ -18,19 +18,9 @@ class UpdateUserCommandTest extends KernelTestCase
         $commandTester->execute([
             'id' => 1,
             'name' => 'user-02',
+            'groups' => [2],
         ]);
 
         $commandTester->assertCommandIsSuccessful();
-
-        $output = $commandTester->getDisplay();
-
-        $this->assertStringContainsString(
-            "User has been updated!
-======================
-User ID: 1
-User name: user-02
-",
-            $output
-        );
     }
 }

@@ -16,19 +16,10 @@ class CreateGroupCommandTest extends KernelTestCase
         $command = $application->find('api:create-group');
         $commandTester = new CommandTester($command);
         $commandTester->execute([
-            'name' => 'group-01',
+            'name' => 'group',
+            'users' => [1,2]
         ]);
 
         $commandTester->assertCommandIsSuccessful();
-
-        $output = $commandTester->getDisplay();
-
-        $this->assertStringContainsString(
-            "Group has been created!
-=======================
-Group ID: 1
-Group name: group-01",
-            $output
-        );
     }
 }
