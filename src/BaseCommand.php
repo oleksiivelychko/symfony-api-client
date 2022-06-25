@@ -3,10 +3,14 @@
 namespace Console;
 
 use GuzzleHttp\Client;
+use JetBrains\PhpStorm\ArrayShape;
+use Psr\Http\Message\ResponseInterface;
 use Symfony\Component\Console\Command\Command;
 
 abstract class BaseCommand extends Command
 {
+    const SUCCESSFUL_OP = "\033[1mOperation has been successful!\n\033[0m\033[32m";
+
     protected Client $apiClient;
     protected string $apiVersion;
 
@@ -25,14 +29,37 @@ abstract class BaseCommand extends Command
         $this->apiVersion = $_ENV['API_VERSION'] ? '/api-v'.$_ENV['API_VERSION'] : '/api';
     }
 
-    protected function getGroupsIds(string $groupsIds): array
+    #[ArrayShape(['Content-Type' => "string", 'Accept' => "string"])]
+    final public function requestHeaders(): array
     {
-        return array_map(function (int $id) {
-            if (!$_ENV['API_VERSION']) {
-                return "/api/groups/$id";
+        return [
+            'Content-Type' => 'application/json',
+            'Accept' => 'application/json',
+        ];
+    }
+
+    final public function getResponseContent(ResponseInterface $response): ?array
+    {
+        return json_decode($response->getBody()?->getContents(), true);
+    }
+
+    final public function prettyPrint($arr, int $i=0): string
+    {
+        $retStr = '';
+
+        foreach ($arr as $key => $val) {
+            $retStr .= str_repeat("\t", $i);
+            $key = '・' . $key . (is_numeric($key) ? '' : "\t") . " ➤ \t";
+
+            if (is_array($val)) {
+                $i++;
+                $retStr .= $key . "\n" . $this->prettyPrint($val, $i);
+                $i--;
             } else {
-                return $id;
+                $retStr .= $key . $val . "\n";
             }
-        }, explode(',', $groupsIds));
+        }
+
+        return $retStr;
     }
 }
