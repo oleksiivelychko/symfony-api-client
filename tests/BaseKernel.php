@@ -68,6 +68,7 @@ final class BaseKernel extends Kernel
             'test' => true,
             'router' => ['utf8' => true],
             'secrets' => false,
+            'http_method_override' => false,
         ]);
     }
 }
