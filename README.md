@@ -4,9 +4,9 @@
 
 Available console commands:
 
-📌 Create group.
+📌 Create group:
 ```
-./console.php api:create-group [name]
+./console.php api:create-group [name] [userId userId...]
 ```
 
 📌 Update group.
@@ -46,7 +46,12 @@ Available console commands:
 API_VERSION=2
 ```
 
-💡 In order to debug CLI application in PhpStorm settings **PHP -> Debug** 
+💡 In order to debug CLI application in PhpStorm settings **PHP -> Debug**
 select `Ignore external connections through unregistered server configurations`
+
+...amd run it before CLI script would be executed:
+```
+export XDEBUG_MODE=debug XDEBUG_SESSION=1
+```
 
 Covered by integration tests.
