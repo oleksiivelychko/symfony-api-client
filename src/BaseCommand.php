@@ -6,6 +6,7 @@ use GuzzleHttp\Client;
 use JetBrains\PhpStorm\ArrayShape;
 use Psr\Http\Message\ResponseInterface;
 use Symfony\Component\Console\Command\Command;
+use function PHPUnit\Framework\isEmpty;
 
 abstract class BaseCommand extends Command
 {
@@ -41,6 +42,19 @@ abstract class BaseCommand extends Command
     final public function getResponseContent(ResponseInterface $response): ?array
     {
         return json_decode($response->getBody()?->getContents(), true);
+    }
+
+    final public function getResponseError(ResponseInterface $response): ?string
+    {
+        $data = $this->getResponseContent($response);
+
+        return rtrim(array_reduce(['title','detail','error'], function ($message, $field) use ($data) {
+            if (isset($data[$field]) && !empty($data[$field])) {
+                $message .= $data[$field]."\n";
+            }
+
+            return $message;
+        }), "\n");
     }
 
     final public function prettyPrint($arr, int $i=0): string

@@ -39,8 +39,7 @@ class UpdateGroupCommand extends BaseCommand
                 ]
             ]);
         } catch (RequestException $e) {
-            $data = $this->getResponseContent($e->getResponse());
-            $output->writeln([$data['title'] ?? '', $data['detail'] ?? '', $data['error'] ?? '']);
+            $output->writeln([$this->getResponseError($e->getResponse())]);
             return Command::INVALID;
         }
 
