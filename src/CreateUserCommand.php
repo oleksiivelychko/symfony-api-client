@@ -21,7 +21,7 @@ final class CreateUserCommand extends BaseCommand
         $this
             ->addArgument('name', InputArgument::REQUIRED, 'Input user name:')
             ->addArgument('email', InputArgument::REQUIRED, 'Input user email:')
-            ->addArgument('groups', InputArgument::OPTIONAL, 'Input groups IDs:')
+            ->addArgument('groups', InputArgument::IS_ARRAY, 'Input groups IDs:')
         ;
     }
 
@@ -30,30 +30,25 @@ final class CreateUserCommand extends BaseCommand
      */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $json = [
-            'name' => $input->getArgument('name'),
-            'email' => $input->getArgument('email'),
-        ];
-
-        if ($input->getArgument('groups')) {
-            $json['groups'] = $this->getGroupsIds($input->getArgument('groups'));
-        }
-
         try {
-            $response = $this->apiClient->post($this->apiVersion.'/users', ['json' => $json]);
+            $response = $this->apiClient->post($this->apiVersion.'/users', [
+                'headers' => $this->requestHeaders(),
+                'json' => [
+                    'name' => $input->getArgument('name'),
+                    'email' => $input->getArgument('email'),
+                    'groups' => $input->getArgument('groups'),
+                ]
+            ]);
         } catch (RequestException $e) {
-            $data = json_decode($e->getResponse()->getBody()->getContents(), true);
+            $data = $this->getResponseContent($e->getResponse());
             $output->writeln([$data['title'] ?? '', $data['detail'] ?? '', $data['error'] ?? '']);
             return Command::INVALID;
         }
 
-        $data = json_decode($response->getBody()->getContents(), true);
+        $data = $this->getResponseContent($response);
+
         $output->writeln([
-            'User has been created!',
-            '======================',
-            'User ID: '.$data['id'],
-            'User name: '.$data['name'],
-            'User email: '.$data['email'],
+            self::SUCCESSFUL_OP, $this->prettyPrint($data)
         ]);
 
         return Command::SUCCESS;

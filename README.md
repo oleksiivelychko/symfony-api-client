@@ -19,9 +19,9 @@ Available console commands:
 ./console.php api:delete-group [id]
 ```
 
-📌 Create user.
+📌 Create user:
 ```
-./console.php api:create-user [name] [email]
+./console.php api:create-user [name] [email] [groupId groupId...]
 ```
 
 📌 Update user (...and add to groups 1,2).
