@@ -18,7 +18,10 @@ class CreateGroupCommand extends BaseCommand
 {
     protected function configure(): void
     {
-        $this->addArgument('name', InputArgument::REQUIRED, 'Input group name:');
+        $this
+            ->addArgument('name', InputArgument::REQUIRED, 'Input group name:')
+            ->addArgument('users', InputArgument::IS_ARRAY, 'Input users IDs:')
+            ;
     }
 
     /**
@@ -28,24 +31,26 @@ class CreateGroupCommand extends BaseCommand
     {
         try {
             $response = $this->apiClient->post($this->apiVersion.'/groups', [
+                'headers' => $this->requestHeaders(),
                 'json' => [
-                    'name' => $input->getArgument('name')
-                ]
+                    'name' => $input->getArgument('name'),
+                    'users' => $input->getArgument('users')
+                ],
             ]);
         } catch (RequestException $e) {
-            $data = json_decode($e->getResponse()->getBody()->getContents(), true);
+            $data = $this->getResponseContent($e->getResponse());
             $output->writeln([$data['title'] ?? '', $data['detail'] ?? '', $data['error'] ?? '']);
             return Command::INVALID;
         }
 
-        $data = json_decode($response->getBody()->getContents(), true);
+        $data = $this->getResponseContent($response);
+
         $output->writeln([
-            'Group has been created!',
-            '=======================',
-            'Group ID: '.$data['id'],
-            'Group name: '.$data['name']
+            self::SUCCESSFUL_OP, $this->prettyPrint($data)
         ]);
 
         return Command::SUCCESS;
     }
+
+
 }
