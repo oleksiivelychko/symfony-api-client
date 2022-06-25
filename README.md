@@ -14,7 +14,7 @@ Available console commands:
 ./console.php api:update-group [id] [name] [userId userId...]
 ```
 
-📌 Delete group.
+📌 Delete group:
 ```
 ./console.php api:delete-group [id]
 ```

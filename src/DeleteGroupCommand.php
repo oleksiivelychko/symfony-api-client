@@ -27,16 +27,15 @@ class DeleteGroupCommand extends BaseCommand
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         try {
-            $response = $this->apiClient->delete($this->apiVersion.'/groups/'.$input->getArgument('id'));
+            $this->apiClient->delete($this->apiVersion.'/groups/'.$input->getArgument('id'));
         } catch (RequestException $e) {
-            $data = json_decode($e->getResponse()->getBody()->getContents(), true);
+            $data = $this->getResponseContent($e->getResponse());
             $output->writeln([$data['title'] ?? '', $data['detail'] ?? '', $data['error'] ?? '']);
             return Command::INVALID;
         }
 
         $output->writeln([
-            'Group has been deleted!',
-            '=======================',
+            self::SUCCESSFUL_OP,
         ]);
 
         return Command::SUCCESS;
