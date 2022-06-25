@@ -34,7 +34,7 @@ Available console commands:
 ./console.php api:delete-user [id]
 ```
 
-📌 List users in groups.
+📌 List users in groups:
 ```
 ./console.php api:list-group [id]
 ```
@@ -53,5 +53,3 @@ select `Ignore external connections through unregistered server configurations`
 ```
 export XDEBUG_MODE=debug XDEBUG_SESSION=1
 ```
-
-Covered by integration tests.
