@@ -9,9 +9,9 @@ Available console commands:
 ./console.php api:create-group [name] [userId userId...]
 ```
 
-📌 Update group.
+📌 Update group:
 ```
-./console.php api:update-group [id] [name]
+./console.php api:update-group [id] [name] [userId userId...]
 ```
 
 📌 Delete group.

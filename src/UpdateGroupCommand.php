@@ -21,6 +21,7 @@ class UpdateGroupCommand extends BaseCommand
         $this
             ->addArgument('id', InputArgument::REQUIRED, 'Input group ID:')
             ->addArgument('name', InputArgument::REQUIRED, 'Input group name:')
+            ->addArgument('users', InputArgument::IS_ARRAY, 'Input users IDs:')
         ;
     }
 
@@ -31,22 +32,22 @@ class UpdateGroupCommand extends BaseCommand
     {
         try {
             $response = $this->apiClient->put($this->apiVersion.'/groups/'.$input->getArgument('id'), [
+                'headers' => $this->requestHeaders(),
                 'json' => [
-                    'name' => $input->getArgument('name')
+                    'name' => $input->getArgument('name'),
+                    'users' => $input->getArgument('users'),
                 ]
             ]);
         } catch (RequestException $e) {
-            $data = json_decode($e->getResponse()->getBody()->getContents(), true);
+            $data = $this->getResponseContent($e->getResponse());
             $output->writeln([$data['title'] ?? '', $data['detail'] ?? '', $data['error'] ?? '']);
             return Command::INVALID;
         }
 
-        $data = json_decode($response->getBody()->getContents(), true);
+        $data = $this->getResponseContent($response);
+
         $output->writeln([
-            'Group has been updated!',
-            '=======================',
-            'Group ID: '.$data['id'],
-            'Group name: '.$data['name']
+            self::SUCCESSFUL_OP, $this->prettyPrint($data)
         ]);
 
         return Command::SUCCESS;
