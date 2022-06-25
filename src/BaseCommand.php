@@ -6,7 +6,6 @@ use GuzzleHttp\Client;
 use JetBrains\PhpStorm\ArrayShape;
 use Psr\Http\Message\ResponseInterface;
 use Symfony\Component\Console\Command\Command;
-use function PHPUnit\Framework\isEmpty;
 
 abstract class BaseCommand extends Command
 {
